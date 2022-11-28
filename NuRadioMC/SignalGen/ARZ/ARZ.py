@@ -321,7 +321,7 @@ class ARZ(object):
 
     def __init__(self, seed=1234, interp_factor=1, interp_factor2=100, library=None,
                  arz_version='ARZ2020', use_numba=True):
-        logger.warning("setting seed to {}".format(seed, interp_factor))
+        logger.info("setting seed to {}".format(seed))
         self._random_generator = np.random.RandomState(seed)
         self._interp_factor = interp_factor
         self._interp_factor2 = interp_factor2
@@ -337,7 +337,7 @@ class ARZ(object):
         self.__check_and_get_library()
         self.__set_model_parameters(arz_version)
 
-        logger.warning("loading shower library ({}) into memory".format(library))
+        logger.info("loading shower library ({}) into memory".format(library))
         self._library = io_utilities.read_pickle(library)
         self._use_numba = use_numba
         if use_numba & (not numba_available):
