@@ -190,7 +190,24 @@ A :class:`SimStation<NuRadioReco.framework.sim_station>` can hold the same
 properties as the ``Station`` (and inherits from it), but is used for the MC truth  of the simulation. This
 also implies that events from measured data typically do not have a ``SimStation``.
 
+Unlike a normal ``Station``, the contained ``SimChannels`` within a ``SimStation`` correspond to the waveforms
+produced by a given shower and ray tracing solution as opposed to a physical piece of hardware.
+
 It can be accessed by the ``get_sim_station`` method of the ``Station`` class.
+
+SimChannel
+____________
+A :class:`SimChannel<NuRadioReco.framework.sim_channel>` is used to store the noise-free voltage traces for each ``SimStation``. 
+The voltage information can be accessed via the parameter storage and methods inhereted from :class:`BaseTrace<NuRadioReco.framework.base_trace>`.
+While this class is similar to a ``Channel``, a ``SimChannel`` instance is made for each, hardware-channel,
+shower, and ray-tracing solution.
+
+These can be accessed using the methods from ``SimStation``:
+
+ #. :func:`get_channels_by_channel_id<NuRadioReco.framework.sim_station>` - channels for all combinations of rays and showers for a given hardware-channel
+ #. :func:`get_channels_by_ray_tracing_id<NuRadioReco.framework.sim_station>` - channels for all combinations of showers and hardware-channels for a given ray solution
+ #. :func:`get_channels_by_shower_id<NuRadioReco.framework.sim_station>` - channels for all combinations of rays and hardware-channels for a given shower
+ #. :func:`get_channel<NuRadioReco.framework.sim_station>` - A single channel when all three identifiers are specified
 
 BaseTrace
 ____________
@@ -255,7 +272,7 @@ which this data is stored. For each additional detector (or set of detector data
 object can be added via the ``add_hybrid_shower`` method or accessed via the ``get_hybrid_shower``
 or ``get_hybrid_showers`` methods.
 
-It can be accessed via the ``get_hybrid_information'' method of the ``Event`` class.
+It can be accessed via the ``get_hybrid_information`` method of the ``Event`` class.
 
 Hybrid Shower
 ______________
